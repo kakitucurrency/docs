@@ -1,3 +1,8 @@
+---
+title: Run a Node (Community)
+description: Deploying a Kakitu representative node on Railway, VPS, or cloud
+---
+
 # Run a Kakitu Node
 
 Running a Kakitu representative node helps secure and decentralise the network. Representatives participate in consensus (Open Representative Voting) by voting on blocks. The more weight delegated to independent representatives, the more resilient the network.
