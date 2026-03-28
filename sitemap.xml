@@ -5,7 +5,27 @@
          <lastmod>2026-03-28</lastmod>
     </url>
     <url>
+         <loc>https://docs.kakitu.org/glossary/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/commands/command-line-interface/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/commands/rpc-protocol/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
          <loc>https://docs.kakitu.org/commands/rpc-reference/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/community/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/community/contributing/</loc>
          <lastmod>2026-03-28</lastmod>
     </url>
     <url>
@@ -73,6 +93,10 @@
          <lastmod>2026-03-28</lastmod>
     </url>
     <url>
+         <loc>https://docs.kakitu.org/protocol-design/attack-mitigations/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
          <loc>https://docs.kakitu.org/protocol-design/block-lattice/</loc>
          <lastmod>2026-03-28</lastmod>
     </url>
@@ -101,7 +125,23 @@
          <lastmod>2026-03-28</lastmod>
     </url>
     <url>
+         <loc>https://docs.kakitu.org/protocol-design/whitepaper/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
          <loc>https://docs.kakitu.org/protocol-design/work/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/releases/network-upgrades/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/releases/node-releases/</loc>
+         <lastmod>2026-03-28</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.kakitu.org/releases/roadmap/</loc>
          <lastmod>2026-03-28</lastmod>
     </url>
     <url>
