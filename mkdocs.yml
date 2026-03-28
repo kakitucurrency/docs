@@ -1,0 +1,98 @@
+site_name: Kakitu Docs
+site_url: https://docs.kakitu.org
+site_description: Official documentation for Kakitu — Kenya's feeless digital shilling (KSHS)
+site_author: Kakitu Currency
+repo_url: https://github.com/kakitucurrency
+repo_name: kakitucurrency
+edit_uri: ""
+
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  font:
+    text: IBM Plex Mono
+    code: IBM Plex Mono
+  features:
+    - content.code.copy
+    - navigation.expand
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+extra_css:
+  - stylesheets/kakitu.css
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - What is Kakitu?: getting-started/what-is-kakitu.md
+    - Quick Start: getting-started/quick-start.md
+    - Install a Node: getting-started/install-node.md
+  - Network:
+    - Network Parameters: network/network-parameters.md
+    - Genesis Block: network/genesis.md
+  - Tools & SDKs:
+    - KeyTools (Web): tools/keytools.md
+    - Go SDK: tools/gokakitu.md
+    - JavaScript SDK: tools/kakitucurrency-js.md
+    - Atto CLI Wallet: tools/atto-wallet.md
+    - MCP Server (AI): tools/mcp-server.md
+  - Integration:
+    - RPC Reference: integration/rpc-reference.md
+    - Send & Receive: integration/send-receive.md
+    - Block Confirmation: integration-guides/block-confirmation.md
+    - Work Generation: integration-guides/work-generation.md
+    - WebSockets: integration-guides/websockets.md
+    - Key Management: integration-guides/key-management.md
+  - Running a Node:
+    - Overview: running-a-node/overview.md
+    - Node Setup: running-a-node/node-setup.md
+    - Configuration: running-a-node/configuration.md
+    - Security: running-a-node/security.md
+    - Representative Voting: running-a-node/representative-voting.md
+    - Work Generation: running-a-node/work-generation.md
+    - Monitoring: running-a-node/monitoring.md
+    - Troubleshooting: running-a-node/troubleshooting.md
+  - Protocol:
+    - Overview: protocol-design/overview.md
+    - Block Lattice: protocol-design/block-lattice.md
+    - Blocks: protocol-design/blocks.md
+    - Work: protocol-design/work.md
+  - Community:
+    - Run a Node: community/run-a-node.md
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/kakitucurrency
