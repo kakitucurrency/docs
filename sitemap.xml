@@ -2,214 +2,214 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.kakitu.org/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/glossary/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/commands/command-line-interface/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/commands/rpc-protocol/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/commands/rpc-reference/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/community/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/community/contributing/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/community/run-a-node/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/getting-started/install-node/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/getting-started/quick-start/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/getting-started/what-is-kakitu/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration/rpc-reference/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration/send-receive/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/block-confirmation/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/build-options/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/ipc-integration/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/key-management/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/send-receive/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/the-basics/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/websockets/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/integration-guides/work-generation/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/network/genesis/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/network/network-parameters/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/attack-mitigations/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/block-lattice/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/blocks/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/networking/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/orv-consensus/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/overview/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/representatives/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/signing-hashing/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/whitepaper/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/protocol-design/work/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/releases/network-upgrades/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/releases/node-releases/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/releases/roadmap/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/configuration/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/docker-management/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/ledger-management/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/monitoring/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/node-setup/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/overview/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/representative-voting/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/security/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/troubleshooting/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/wallet-setup/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/running-a-node/work-generation/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/tools/atto-wallet/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/tools/gokakitu/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/tools/kakitucurrency-js/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/tools/keytools/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/tools/mcp-server/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
     <url>
          <loc>https://docs.kakitu.org/what-is-kakitu/</loc>
-         <lastmod>2026-03-28</lastmod>
+         <lastmod>2026-10-25</lastmod>
     </url>
 </urlset>
