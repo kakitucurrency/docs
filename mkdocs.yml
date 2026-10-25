@@ -1,6 +1,6 @@
 site_name: Kakitu Docs
 site_url: https://docs.kakitu.org
-site_description: Official documentation for Kakitu — Kenya's feeless digital shilling (KSHS)
+site_description: The Kakitu developer documentation has moved to developer.kakitu.org
 site_author: Kakitu Currency
 repo_url: https://github.com/kakitucurrency
 repo_name: kakitucurrency
@@ -30,79 +30,12 @@ theme:
 extra_css:
   - stylesheets/kakitu.css
 
+# The site is reduced to a single redirect page. Everything that was here documented the
+# Nano-era Kakitu — block lattice, RPC, work generation — and described a product that no
+# longer exists. The pages remain in git history; they are simply no longer built or served.
+# The developer documentation lives at developer.kakitu.org.
 nav:
   - Home: index.md
-
-  - What is Kakitu?: what-is-kakitu/index.md
-
-  - Getting Started:
-    - What is Kakitu?: getting-started/what-is-kakitu.md
-    - Quick Start: getting-started/quick-start.md
-    - Install a Node: getting-started/install-node.md
-
-  - Network:
-    - Network Parameters: network/network-parameters.md
-    - Genesis Block: network/genesis.md
-
-  - Tools & SDKs:
-    - KeyTools (Web): tools/keytools.md
-    - Go SDK: tools/gokakitu.md
-    - JavaScript SDK: tools/kakitucurrency-js.md
-    - Atto CLI Wallet: tools/atto-wallet.md
-    - MCP Server (AI): tools/mcp-server.md
-
-  - Integration Guides:
-    - The Basics: integration-guides/the-basics.md
-    - Key Management: integration-guides/key-management.md
-    - Block Confirmation: integration-guides/block-confirmation.md
-    - Work Generation: integration-guides/work-generation.md
-    - WebSockets: integration-guides/websockets.md
-    - IPC Integration: integration-guides/ipc-integration.md
-    - Build Options: integration-guides/build-options.md
-    - RPC Reference (legacy): integration/rpc-reference.md
-    - Send & Receive (legacy): integration/send-receive.md
-
-  - Running a Node:
-    - Overview: running-a-node/overview.md
-    - Node Security: running-a-node/security.md
-    - Node Setup: running-a-node/node-setup.md
-    - Docker Management: running-a-node/docker-management.md
-    - Configuration: running-a-node/configuration.md
-    - Wallet Setup: running-a-node/wallet-setup.md
-    - Representative Voting: running-a-node/representative-voting.md
-    - Work Generation: running-a-node/work-generation.md
-    - Ledger Management: running-a-node/ledger-management.md
-    - Monitoring: running-a-node/monitoring.md
-    - Troubleshooting: running-a-node/troubleshooting.md
-
-  - Protocol Design:
-    - Overview: protocol-design/overview.md
-    - Block Lattice: protocol-design/block-lattice.md
-    - Blocks: protocol-design/blocks.md
-    - Work (PoW): protocol-design/work.md
-    - Networking: protocol-design/networking.md
-    - ORV Consensus: protocol-design/orv-consensus.md
-    - Representatives: protocol-design/representatives.md
-    - Signing & Hashing: protocol-design/signing-hashing.md
-    - Attack Mitigations: protocol-design/attack-mitigations.md
-    - Whitepaper: protocol-design/whitepaper.md
-
-  - Commands:
-    - RPC Protocol: commands/rpc-protocol.md
-    - Command Line Interface: commands/command-line-interface.md
-
-  - Releases:
-    - Node Releases: releases/node-releases.md
-    - Network Upgrades: releases/network-upgrades.md
-    - Roadmap: releases/roadmap.md
-
-  - Community:
-    - Overview: community/index.md
-    - Run a Node: community/run-a-node.md
-    - Contributing: community/contributing.md
-
-  - Glossary: glossary.md
-
 plugins:
   - search:
       separator: '[\s\-\.]+'
