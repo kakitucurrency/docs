@@ -24,5 +24,10 @@ jobs:
       - name: Install MkDocs Material
         run: pip install mkdocs-material
 
+      - name: Assert the site is only the redirect page
+        run: |
+          mkdocs build --strict
+          test "$(find site -name index.html | wc -l)" -eq 1
+
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force

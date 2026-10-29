@@ -1,69 +1,20 @@
 site_name: Kakitu Docs
 site_url: https://docs.kakitu.org
-site_description: The Kakitu developer documentation has moved to developer.kakitu.org
-site_author: Kakitu Currency
-repo_url: https://github.com/kakitucurrency
-repo_name: kakitucurrency
-edit_uri: ""
-
+site_description: Kakitu's documentation has moved to developer.kakitu.org
 docs_dir: docs
 
+# This site is a single redirect page. The Nano-era pages that used to live here are in git
+# history only; they described a product that no longer exists. The developer documentation
+# lives at https://developer.kakitu.org.
 theme:
   name: material
   palette:
     scheme: slate
-    primary: custom
-    accent: custom
-  font:
-    text: IBM Plex Mono
-    code: IBM Plex Mono
-  features:
-    - content.code.copy
-    - navigation.expand
-    - navigation.indexes
-    - navigation.sections
-    - navigation.tabs
-    - navigation.top
-    - search.highlight
-    - search.suggest
 
 extra_css:
   - stylesheets/kakitu.css
 
-# The site is reduced to a single redirect page. Everything that was here documented the
-# Nano-era Kakitu — block lattice, RPC, work generation — and described a product that no
-# longer exists. The pages remain in git history; they are simply no longer built or served.
-# The developer documentation lives at developer.kakitu.org.
 nav:
   - Home: index.md
-plugins:
-  - search:
-      separator: '[\s\-\.]+'
 
-markdown_extensions:
-  - admonition
-  - attr_list
-  - def_list
-  - footnotes
-  - md_in_html
-  - pymdownx.details
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - toc:
-      permalink: true
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/kakitucurrency
+plugins: []
