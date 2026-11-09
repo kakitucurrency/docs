@@ -1,192 +1,101 @@
-# Release infrastructure — what is missing and how to finish it
+# Release infrastructure — how releases are cut today
 
-Written 2026-10-12. Three of these block automation; the rest are debts that will
-bite at a bad moment.
-
----
-
-## 1. Automatic Play Store uploads  ← the one you asked about
-
-**Where it stands.** `android/fastlane` already has the `play_release` lane. It builds
-the bundle through the Flutter tool (not gradle directly, which reads a stale version)
-and uploads to the `internal` track as a **draft**, so a human still decides when it
-reaches users. It needs exactly one thing: a service-account JSON key at the path
-`SUPPLY_JSON_KEY` points to. That key has never been created.
-
-**Why it has never been created.** Creating one is refused with:
-
-> An Organization Policy that blocks service account key creation has been enforced
-> on your organization.
-
-That is `constraints/iam.disableServiceAccountKeyCreation`. You disabled it and the
-error persisted, which almost always means one of three things:
-
-1. The constraint is set at the **organization** node and you changed it on the
-   **project**. A project does not inherit a change made beside it — it has to
-   explicitly override the parent.
-2. Your account does not hold **Organization Policy Administrator**
-   (`roles/orgpolicy.policyAdmin`). Project Owner is not enough, and the console
-   will often show the toggle without being able to save it.
-3. You changed it and did not wait. Propagation is usually under a minute but is
-   not instant.
-
-### Path A — fix the policy (do this if you own the organization)
-
-`gcloud` is now installed. It is not authenticated; that step is interactive and has
-to be you:
-
-```
-gcloud auth login
-gcloud organizations list                       # note the ORG_ID
-gcloud projects list                            # note the PROJECT_ID you want
-```
-
-See what is actually in force, at both levels:
-
-```
-gcloud resource-manager org-policies describe \
-  constraints/iam.disableServiceAccountKeyCreation --organization=ORG_ID
-
-gcloud resource-manager org-policies describe \
-  constraints/iam.disableServiceAccountKeyCreation --project=PROJECT_ID --effective
-```
-
-The `--effective` read on the project is the one that matters: it is what the API
-will enforce. If it still says enforced, either lift it at the org:
-
-```
-gcloud resource-manager org-policies delete \
-  constraints/iam.disableServiceAccountKeyCreation --organization=ORG_ID
-```
-
-or override it for just this project, which is the safer choice because it leaves
-the guard-rail standing everywhere else:
-
-```
-cat > /tmp/allow-keys.yaml <<'EOF'
-constraint: constraints/iam.disableServiceAccountKeyCreation
-booleanPolicy:
-  enforced: false
-EOF
-gcloud resource-manager org-policies set-policy /tmp/allow-keys.yaml --project=PROJECT_ID
-```
-
-Re-run the `--effective` read until it reports not enforced.
-
-### Path B — sidestep it entirely (do this if you do not own the org, or Path A stalls)
-
-The service account does **not** have to live in the organization's project. Play
-Console grants access to a service-account *email address*; it does not care which
-Google Cloud project issued it. So create it in a project owned by a personal Google
-account, where no org policy applies:
-
-1. Sign in to <https://console.cloud.google.com> as a **personal** Google account
-   (not the org one). Create a new project, e.g. `kakitu-play-release`.
-2. Enable the Google Play Android Developer API for it:
-   APIs & Services → Library → "Google Play Android Developer API" → Enable.
-3. IAM & Admin → Service Accounts → Create service account.
-   Name it `play-publisher`. No project roles are needed — its power comes from
-   Play Console, not from Google Cloud.
-4. Open it → Keys → Add key → Create new key → **JSON**. It downloads.
-5. In **Play Console** → Users and permissions → Invite new user → paste the
-   service account's email (`play-publisher@kakitu-play-release.iam.gserviceaccount.com`).
-   Give it, for the Kakitu app only: **Release to testing tracks** and
-   **Release apps to production** if you want it to be able to. Nothing else.
-
-### Then, either path
-
-```
-mkdir -p ~/.playconsole
-mv ~/Downloads/<that-file>.json ~/.playconsole/kakitu-play-api.json
-chmod 600 ~/.playconsole/kakitu-play-api.json
-```
-
-Do not put it in the repo and do not paste its contents anywhere — it is a
-credential with release rights over your listing. `android/fastlane/Appfile`
-already expects it by environment:
-
-```
-export SUPPLY_JSON_KEY=~/.playconsole/kakitu-play-api.json
-cd android && bundle exec fastlane play_release
-```
-
-Verify before trusting it:
-
-```
-cd android && bundle exec fastlane run validate_play_store_json_key \
-  json_key:$HOME/.playconsole/kakitu-play-api.json
-```
-
-A first upload through the API sometimes fails with "the caller does not have
-permission" for up to 24 hours after the invite — that is Play propagating, not a
-wrong key.
+Rewritten 2026-11-09. The 2026-10-12 version described blockers that have since been cleared
+(Play API key, iOS signing, a Mac). This is what works now, end to end. Both stores are fed
+from the app repo's `eth` branch (`kakitucurrency/Kakitu_wallet_flutter`).
 
 ---
 
-## 2. `ios/fastlane/.env` does not survive
+## 1. Android — Google Play (automated)
 
-It is gitignored, correctly — but that means it exists only on this machine and
-vanishes on any fresh clone, and it has already gone missing once. It holds no
-secret, only identifiers; the secret is the `.p8`.
-
-Keep a copy outside the repo, e.g. `~/.appstoreconnect/kakitu-ios.env`, and either
-symlink it in or `source` it before releasing. Its contents:
+**Where it runs.** On the Linux build PC, from the main app checkout (the only checkout with
+the real upload key, `android/key.properties`; worktrees under `~/build/wt/` carry a throwaway
+key for test builds and must never be used for a store build).
 
 ```
-ASC_KEY_ID=W3DD5X485T
-ASC_ISSUER_ID=aead8807-efc9-416d-84a6-4393aa91913b
-ASC_KEY_PATH=$HOME/.appstoreconnect/private_keys/AuthKey_W3DD5X485T.p8
-FASTLANE_TEAM_ID=JK46FCYNG4
+cd Kakitu_wallet_flutter/android
+export JAVA_HOME=$HOME/.local/jdk TMPDIR=$HOME/build/tmp \
+       SUPPLY_JSON_KEY=$HOME/.playconsole/kakitu-play-api.json \
+       KAKITU_ENV=production \
+       LOAN_POT_ADDRESS=0xb38dbA7abD392fF1488e325170DE4b9F4EC05a1F
+fastlane play_release track:production release_status:completed
 ```
 
-The `.p8` at `~/.appstoreconnect/private_keys/` is the thing to back up properly.
-Apple will not re-issue it; losing it means revoking and re-creating the key.
+- The lane builds through Flutter (`flutter build appbundle --flavor play`), not gradle, and
+  refuses to start without a well-formed `LOAN_POT_ADDRESS` (without it the app refuses loan,
+  Boost and repay signing).
+- `release_status:completed` is what makes it public. The lane's default is `draft`.
+- Policy: production, 100% rollout, never staged.
+- **Verify against Google, not the log.** A short Ruby script (googleauth, scope
+  `androidpublisher`) opens an edit and reads `tracks/production`; the expected answer is
+  `status=completed versions=["<code>"] fraction=full`. Service account:
+  `kakitu-play-ci@kakitu-play.iam.gserviceaccount.com`, package `com.kakitu.app`.
+- Do not pipe the lane through `tail`: fastlane prints its changelog last and the build log is
+  lost; exit code 0 alone does not prove an upload.
+- Build on `$HOME/build` with `TMPDIR` there: the per-user `/tmp` quota fills and Flutter then
+  "hangs" (errno 122).
 
----
+## 2. iOS — App Store (GitHub Actions, no Mac)
 
-## 3. Disk
+**Where it runs.** `.github/workflows/ios-testflight.yml` on a GitHub macOS runner. The file
+must exist on `main` for `workflow_dispatch` to be offered; the build uses `eth`:
 
-A release needs roughly 8–10 GiB of headroom and the machine has been running at
-under 1 GiB twice, killing both an Xcode archive ("database or disk is full") and a
-Gradle R8 pass ("No space left on device"). The second failure also left a stale
-Gradle lock that broke the *next* build for a different reason.
+```
+gh workflow run ios-testflight.yml --ref eth -f flutter_env=production
+gh run watch <run-id> --exit-status
+```
 
-Caches cleared so far, all of which refill: DerivedData, Go build cache, Homebrew,
-pip, Gradle `jars-9`.
+- The workflow builds Flutter with `KAKITU_ENV` and the pinned `LOAN_POT_ADDRESS`, then
+  fastlane signs (distribution cert `6WCC8QB6WA`, expires 2027-10-30, manual signing), archives
+  and uploads. With no `build_number` input the lane takes the pubspec build number.
+- Repository secrets it needs: `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8_BASE64`,
+  `FASTLANE_TEAM_ID` (`JK46FCYNG4`, KAKITU SECURITIES LIMITED), `IOS_DIST_CERT_P12_BASE64`,
+  `IOS_DIST_CERT_PASSWORD`. All set since 2026-10-30.
+- `Info.plist` declares `ITSAppUsesNonExemptEncryption=false`, so builds no longer hold at
+  "Missing Compliance".
+- **Uploading is not submitting.** After the build shows `VALID` in App Store Connect, submit
+  through the App Store Connect API (key `HV84YXW8JC`, `.p8` under
+  `~/.appstoreconnect/private_keys/`, 600): cancel any open review submission and wait for
+  `DEVELOPER_REJECTED`, PATCH the version string and attach the build, then create a review
+  submission, add the version as an item, and PATCH `submitted: true`. Use
+  `releaseType: AFTER_APPROVAL` so approval publishes it with no further step. Apple's cancel
+  can take several minutes.
+- Resolution Center (rejection reasons) is not reachable with the API key; it needs a web
+  login on the Account Holder's Apple ID.
+- App Store guideline 3.2.2(ix): personal-loan apps may not charge more than 36% APR including
+  fees and may not require full repayment within 60 days. Production loan pricing is set in the
+  admin console; check it against this before an iOS submission that shows Loans.
 
-The standing 15 GiB is three iOS simulators:
+## 3. Secrets to back up
 
-| simulator | size | state |
+| what | where | why it matters |
 |---|---|---|
-| iPhone 17 | 6.6G | shutdown |
-| iPhone 17 Pro | 4.7G | shutdown |
-| iPhone 17 Pro Max | 3.7G | booted |
+| App Store Connect API key `.p8` | `~/.appstoreconnect/private_keys/` | Apple never re-issues it |
+| iOS distribution key + p12 | `~/.appstoreconnect/dist/` (600) | signs every iOS build |
+| Play service-account JSON | `~/.playconsole/kakitu-play-api.json` | every Play upload |
+| Android upload keystore | referenced by `android/key.properties` in the main checkout | Play rejects a different key |
+| Loan pot / data keys, phone-code key | `~/kakitu-secrets/` (700) | set on Railway; losing them stops loans / phone proof |
 
-Erasing one wipes the Kakitu wallets on it, seed phrases included — which is why
-none were touched. Decide which hold wallets worth keeping, then:
+## 4. Machine
 
-```
-xcrun simctl erase <UDID>
-```
+The build PC is Linux with 14 GiB RAM. Run heavy jobs one at a time (Flutter release build,
+the full Flutter suite, the server's controller and repository suites, the Android emulator):
+three at once has already had the desktop killed by the out-of-memory daemon. The server's
+`repository` and `controller` test packages need `-timeout 50m`; Go's default 10 minutes cuts
+`repository` off. Keep the charger in: the PC has died on battery mid-build, and a power loss
+corrupted the local test Postgres once.
 
-Before any release, check: `df -h /`.
+## 5. Debts carried from 2026-10-12 (not re-verified since unless marked)
 
----
-
-## 4. Debts that are not blocking today
-
-- **Rotate the Fonbnk production credentials.** They were pasted in cleartext in an
-  earlier session, so treat them as exposed. Do it before real user money moves.
-- **Revoke the Alchemy key** that is in the Flutter git history, and the Stripe key.
-  History rewriting is not needed — revoking is.
-- **Firebase is split.** Android and the server are on project `kakitu-wallet`; iOS
-  is on `kakitu-wallet-fc743`. Push notifications will not work across both until
-  they are consolidated. Nothing sends pushes yet, so this is cheap to fix now and
-  expensive later.
-- **`main` / `master` are ~137 commits behind `eth`.** Everything real is on `eth`.
-  Either merge or retire those branches, so nobody clones the default branch and
-  gets a year-old app.
-- **`kakitu-pulse` is merged but not running.** It needs KSHS in a wallet and
-  somewhere to run.
-- **Reserves are about 15 KES short** — 133 KSHS issued against roughly 118 KES of
-  backing. `RESERVE_CHECK_ENABLED=false`, so nothing is enforcing the peg.
+- **Rotate the Fonbnk production credentials** (pasted in cleartext in an earlier session).
+- **Revoke the Alchemy and Stripe keys** in the Flutter git history; rewriting history is not
+  needed, revoking is.
+- **Firebase is split**: Android and the server on `kakitu-wallet`, iOS on
+  `kakitu-wallet-fc743`. The server now sends FCM pushes (Android); iOS pushes still need an
+  APNs key and the consolidation.
+- **`main` / `master` lag `eth`.** Everything real is on `eth`; `main` exists mainly so the iOS
+  workflow can be dispatched.
+- **Committed `ios/8H48RKDJ83.p12`** belongs to an old team; revoke it.
+- **`RESERVE_CHECK_ENABLED` is false** on Railway (last read 2026-10-29), so nothing enforces
+  KSHS supply ≤ backing at mint time; supply is still read off the chain for reporting.
+- **`kakitu-pulse`** was merged but not running as of 2026-10-12.
